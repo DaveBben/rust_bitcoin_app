@@ -1,0 +1,45 @@
+import { Button, VerticalBox, ListView } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    width: 300px;
+    height: 150px;
+    title: "Bitcoin Price Grabber";
+    in-out property <string> price: "0";
+    callback request-increase-value();
+    VerticalBox {
+        spacing: 1px;
+        VerticalLayout {
+            alignment: center;
+            HorizontalLayout {
+                HorizontalLayout {
+                    spacing: 10px;
+                    Image {
+                        source: @image-url("icons/bitcoin-btc-logo.png");
+                        width: 25px;
+            }
+
+                    Text {
+                        font-size: 24px;
+                        text: "BTC";
+                        vertical-alignment: center;
+                    }
+                }
+
+                Text {
+                    font-size: 24px;
+                    horizontal-alignment: right;
+                    text: "$\{root.price}";
+                }
+            }
+        }
+
+        Button {
+            height: 50px;
+            primary: true;
+            text: "Refresh";
+            clicked => {
+                root.request-increase-value();
+            }
+        }
+    }
+}
